@@ -94,5 +94,15 @@ namespace TrainingScheduler.Tests.Db
                     Assert.That(user.Name, Is.EqualTo("User4"));
             }
         }
+
+        [Test]
+        public void TestAddUpdateDeleteNullUser()
+        {
+            GenericRepository<User> rep = new GenericRepository<User>(Context);
+
+            Assert.Throws<Exception>(() => rep.Add(null));
+            Assert.Throws<Exception>(() => rep.Delete(null));
+            Assert.Throws<Exception>(() => rep.Update(null));
+        }
     }
 }
