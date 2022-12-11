@@ -13,5 +13,16 @@ namespace TrainingScheduler.DAL.Contexts
         {
             Database.EnsureCreated();
         }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<TrainingArchive>()
+                .HasOne(c => c.User)
+                .WithMany(x => x.TrainingArchives)
+                .IsRequired()
+                .OnDelete(DeleteBehavior.SetNull);
+
+            modelBuilder.Entity<Exercise>().HasIndex(n => n.Name).IsUnique();
+        }
     }
 }

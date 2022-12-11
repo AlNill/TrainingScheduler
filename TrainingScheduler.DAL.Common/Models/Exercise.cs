@@ -1,9 +1,16 @@
-﻿namespace TrainingScheduler.DAL.Common.Models
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace TrainingScheduler.DAL.Common.Models
 {
     public class Exercise
     {
+        [Key]
         public int Id { get; set; }
+        [Required]
+        [StringLength(50)]
         public string Name { get; set; }
+        [Required]
+        [StringLength(200)]
         public string Description { get; set; }
     }
 }
