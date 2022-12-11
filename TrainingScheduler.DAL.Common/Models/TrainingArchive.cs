@@ -7,7 +7,7 @@
         public int UserId { get; set; }
         public User User { get; set; }
         public int ExerciseId { get; set; }
-        public Exercide Exercise { get; set; }
+        public Exercise Exercise { get; set; }
         public int RepeatCount { get; set; }
         public int? Weight { get; set; }
     }
