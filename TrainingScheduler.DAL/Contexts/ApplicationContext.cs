@@ -22,6 +22,7 @@ namespace TrainingScheduler.DAL.Contexts
                 .IsRequired()
                 .OnDelete(DeleteBehavior.SetNull);
 
+            modelBuilder.Entity<User>().HasIndex(n => n.Name).IsUnique();
             modelBuilder.Entity<Exercise>().HasIndex(n => n.Name).IsUnique();
         }
     }
