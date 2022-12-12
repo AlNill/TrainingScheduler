@@ -39,7 +39,7 @@ namespace TrainingScheduler.DAL.Repositories
         public void Update(TEntity entity)
         {
             if (entity == null)
-                throw new Exception("Updating entity must be not null"); ;
+                throw new Exception("Updating entity must be not null");
             _dbSet.Update(entity);
             _applicationContext.SaveChanges();
         }
