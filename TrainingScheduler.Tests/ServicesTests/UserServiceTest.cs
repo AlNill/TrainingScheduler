@@ -1,6 +1,8 @@
-﻿using Pose;
+﻿using Moq;
+using Pose;
 using TrainingScheduler.BLL.Services;
 using TrainingScheduler.DAL.Common.Interfaces.Repositories;
+using TrainingScheduler.DAL.Common.Interfaces.UnitOfWork;
 using TrainingScheduler.DAL.Common.Models;
 using TrainingScheduler.Tests.ServicesTests.Fake;
 
@@ -13,13 +15,17 @@ namespace TrainingScheduler.Tests.ServicesTests
         [SetUp]
         public void SetUp()
         {
-            _genericRepository = new FakeUserRepository<User>();
+            _genericRepository = new FakeUserRepository();
         }
 
         [Test]
         public void TestAdd()
         {
-            var userService = new UserService(_genericRepository);
+            // Mock UnitOfWork
+            var mockUnitOfWork = new Mock<IUnitOfWork>();
+            mockUnitOfWork.Setup(x => x.GenericRepository<User>()).Returns(_genericRepository);
+            var userService = new UserService(mockUnitOfWork.Object);
+
             // Using library Pose to mock internal DateTime.Now
             Shim shim = Shim.Replace(() => DateTime.Now).With(() => new DateTime(2022, 10, 20));
 

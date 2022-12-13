@@ -1,5 +1,6 @@
 ﻿using TrainingScheduler.BLL.Interfaces;
 using TrainingScheduler.DAL.Common.Interfaces.Repositories;
+using TrainingScheduler.DAL.Common.Interfaces.UnitOfWork;
 using TrainingScheduler.DAL.Common.Models;
 
 namespace TrainingScheduler.BLL.Services
@@ -8,9 +9,9 @@ namespace TrainingScheduler.BLL.Services
     {
         private readonly IGenericRepository<User> _userRepository;
 
-        public UserService(IGenericRepository<User> repository)
+        public UserService(IUnitOfWork unitOfWork)
         {
-            _userRepository = repository;
+            _userRepository = unitOfWork.GenericRepository<User>();
         }
 
         public void Add(User user)

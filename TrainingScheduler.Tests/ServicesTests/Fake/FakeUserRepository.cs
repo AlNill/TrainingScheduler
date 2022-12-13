@@ -3,26 +3,36 @@ using TrainingScheduler.DAL.Common.Models;
 
 namespace TrainingScheduler.Tests.ServicesTests.Fake
 {
-    public class FakeUserRepository<TEntity> : IGenericRepository<TEntity> where TEntity : User
+    public class FakeUserRepository : IUserRepository, IGenericRepository<User>
     {
-        private List<TEntity> _entities = new List<TEntity>();
+        private List<User> _entities = new List<User>();
 
-        public void Add(TEntity entity)
+        public void Add(User entity)
         {
             _entities.Add(entity);
         }
 
-        public void Delete(TEntity entity)
+        public void Delete(User entity)
         {
             _entities.RemoveAll(x => x.Id == entity.Id);
         }
 
-        public IEnumerable<TEntity> GetAll()
+        public IEnumerable<User> GetAll()
         {
             return _entities;
         }
 
-        public void Update(TEntity entity)
+        public User GetById(int id)
+        {
+            return _entities.Where(x => x.Id == id).FirstOrDefault();
+        }
+
+        public User GetUserByName(string name)
+        {
+            return _entities.Where(x => x.Name == name).FirstOrDefault();
+        }
+
+        public void Update(User entity)
         {
             _entities.RemoveAll(x => x.Id == entity.Id);
             _entities.Add(entity);
