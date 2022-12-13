@@ -10,5 +10,6 @@ namespace TrainingScheduler.DAL.Common.Models
         public string Name { get; set; }
 
         public IEnumerable<TrainingArchive> TrainingArchives { get; set; }
+        public DateTime RegistrationTime { get; set; }
     }
 }

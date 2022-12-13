@@ -1,13 +1,20 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using TrainingScheduler.DAL.Common.Interfaces.Repositories;
+using TrainingScheduler.DAL.Common.Interfaces.UnitOfWork;
 using TrainingScheduler.DAL.Contexts;
 
 namespace TrainingScheduler.DAL.Repositories
 {
     public class GenericRepository<TEntity> : IGenericRepository<TEntity> where TEntity : class
     {
-        private readonly DbSet<TEntity> _dbSet;
-        private readonly ApplicationContext _applicationContext;
+        protected readonly DbSet<TEntity> _dbSet;
+        protected readonly ApplicationContext _applicationContext;
+
+        public GenericRepository(IUnitOfWork unitOfWork)
+            : this((ApplicationContext)unitOfWork.Context)
+        {
+
+        }
 
         public GenericRepository(ApplicationContext context)
         {
@@ -36,10 +43,15 @@ namespace TrainingScheduler.DAL.Repositories
             return _dbSet.ToList();
         }
 
+        public TEntity GetById(int id)
+        {
+            return _dbSet.Find(id);
+        }
+
         public void Update(TEntity entity)
         {
             if (entity == null)
-                throw new Exception("Updating entity must be not null"); ;
+                throw new Exception("Updating entity must be not null");
             _dbSet.Update(entity);
             _applicationContext.SaveChanges();
         }

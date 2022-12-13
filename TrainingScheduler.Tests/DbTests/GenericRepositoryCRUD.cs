@@ -104,5 +104,13 @@ namespace TrainingScheduler.Tests.Db
             Assert.Throws<Exception>(() => rep.Delete(null));
             Assert.Throws<Exception>(() => rep.Update(null));
         }
+
+        [Test]
+        public void TestGetAllEmptyDb()
+        {
+            GenericRepository<User> rep = new GenericRepository<User>(Context);
+            List<User> result = (List<User>)rep.GetAll();
+            Assert.That(result.Count, Is.EqualTo(0));
+        }
     }
 }

@@ -12,13 +12,16 @@
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="7.0.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.InMemory" Version="7.0.0" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.1.0" />
+    <PackageReference Include="Moq" Version="4.18.3" />
     <PackageReference Include="NUnit" Version="3.13.3" />
     <PackageReference Include="NUnit3TestAdapter" Version="4.2.1" />
     <PackageReference Include="NUnit.Analyzers" Version="3.3.0" />
     <PackageReference Include="coverlet.collector" Version="3.1.2" />
+    <PackageReference Include="Pose" Version="1.2.1" />
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\TrainingScheduler.BLL\TrainingScheduler.BLL.csproj" />
     <ProjectReference Include="..\TrainingScheduler.DAL.Common\TrainingScheduler.DAL.Common.csproj" />
     <ProjectReference Include="..\TrainingScheduler.DAL\TrainingScheduler.DAL.csproj" />
   </ItemGroup>
